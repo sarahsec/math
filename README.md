@@ -30,7 +30,7 @@ lua matrix_sum.lua
 Run:
 ```bash
 lua fibonacci.lua
-lua fibonacci.lua 40
+lua fibonacci.lua 30
 ```
 
 ## Learning Outcomes
