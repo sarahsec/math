@@ -58,6 +58,10 @@ if arg and arg[0] and tostring(arg[0]):find("fibonacci", 1, true) then
     print(string.format("Recursive time: %.6f seconds", recursiveTime))
     print("Iterative Fibonacci:", r2)
     print(string.format("Iterative time: %.6f seconds", iterativeTime))
+    if r1 ~= r2 then
+        io.stderr:write("recursive and iterative results differ\n")
+        os.exit(1)
+    end
     print(string.format("Speedup: %.2fx", recursiveTime / math.max(iterativeTime, 1e-9)))
 end
 
