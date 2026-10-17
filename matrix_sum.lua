@@ -1,4 +1,29 @@
+local function sameShape(a, b)
+    if type(a) ~= "table" or type(b) ~= "table" or #a == 0 then
+        return false
+    end
+    if type(a[1]) ~= "table" or #a[1] == 0 then
+        return false
+    end
+    if #a ~= #b then
+        return false
+    end
+    local cols = #a[1]
+    for i = 1, #a do
+        if type(a[i]) ~= "table" or type(b[i]) ~= "table" then
+            return false
+        end
+        if #a[i] ~= cols or #b[i] ~= cols then
+            return false
+        end
+    end
+    return true
+end
+
 local function sumMatrices(a, b)
+    if not sameShape(a, b) then
+        error("matrices must be non-empty and the same size", 2)
+    end
     local rows = #a
     local cols = #a[1]
     local result = {}
@@ -21,25 +46,34 @@ local function printMatrix(m)
     end
 end
 
-local matrixA = {
-    {1, 2, 3},
-    {4, 5, 6},
-    {7, 8, 9}
+local M = {
+    sameShape = sameShape,
+    sumMatrices = sumMatrices,
 }
 
-local matrixB = {
-    {9, 8, 7},
-    {6, 5, 4},
-    {3, 2, 1}
-}
+if arg and arg[0] and tostring(arg[0]):find("matrix_sum", 1, true) then
+    local matrixA = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    }
 
-local matrixC = sumMatrices(matrixA, matrixB)
+    local matrixB = {
+        {9, 8, 7},
+        {6, 5, 4},
+        {3, 2, 1}
+    }
 
-print("Matrix A")
-printMatrix(matrixA)
-print("")
-print("Matrix B")
-printMatrix(matrixB)
-print("")
-print("A + B")
-printMatrix(matrixC)
+    local matrixC = sumMatrices(matrixA, matrixB)
+
+    print("Matrix A")
+    printMatrix(matrixA)
+    print("")
+    print("Matrix B")
+    printMatrix(matrixB)
+    print("")
+    print("A + B")
+    printMatrix(matrixC)
+end
+
+return M
