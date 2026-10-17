@@ -38,3 +38,9 @@ lua fibonacci.lua 30
 - Apply matrix addition from linear algebra in code.
 - Compare recursive and iterative algorithm behavior in Fibonacci.
 - Observe how implementation choice impacts performance.
+
+## Tests
+
+```bash
+lua tests/test.lua
+```
